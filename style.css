@@ -1,27 +1,1655 @@
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#08070a;--panel:#111016;--gold:#f6b83f;--gold2:#ffd978;--red:#d92f38;--text:#fffaf0;--muted:#aaa4a0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{text-decoration:none;color:inherit}.announcement{text-align:center;background:#191016;color:#f7c85c;font-size:12px;font-weight:700;letter-spacing:.08em;padding:9px 15px}
-.navbar{position:fixed;z-index:50;top:33px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px 6%;background:rgba(8,7,10,.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)}
-.brand{display:flex;gap:10px;align-items:center;font-family:Cinzel,serif;font-weight:700;letter-spacing:.08em}.brand b{color:var(--gold)}.brand-mark{color:var(--gold);font-size:23px}
-nav{display:flex;gap:28px;color:#ddd;font-size:13px;font-weight:600}nav a:hover{color:var(--gold)}
-.nav-cta,.primary-btn{background:linear-gradient(135deg,#f6b83f,#e48c22);color:#17110a;padding:12px 20px;border-radius:999px;font-weight:800;display:inline-flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(238,159,42,.2)}
-.menu-btn{display:none;background:none;border:0;color:white;font-size:25px}
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:150px 7% 90px;background:linear-gradient(90deg,rgba(5,4,7,.92) 0%,rgba(5,4,7,.64) 42%,rgba(5,4,7,.28)),url("assets/dandiya-poster.png") center/cover no-repeat;overflow:hidden}
-.hero:after{content:"";position:absolute;inset:auto 0 0;height:25%;background:linear-gradient(transparent,var(--bg))}
-.hero-content{position:relative;z-index:2;max-width:720px}.eyebrow,.section-kicker{color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
-h1,h2{font-family:Cinzel,serif;line-height:1.05}h1{font-size:clamp(55px,9vw,110px);text-transform:uppercase;margin:18px 0}h1 span,h2 span{color:var(--gold)}.hero-tag{font-size:20px;color:#eee;margin-bottom:32px}
-.event-meta{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:34px}.event-meta div{border-left:2px solid var(--gold);padding-left:12px}.event-meta small{display:block;color:#999;font-size:10px;letter-spacing:.15em}.event-meta strong{font-size:12px}
-.scroll-note{position:absolute;bottom:28px;left:7%;z-index:3;color:#aaa;font-size:10px;letter-spacing:.2em}
-.section{padding:100px 7%}.intro{text-align:center;max-width:900px;margin:auto}.intro h2,.section h2{font-size:clamp(35px,5vw,60px);margin:12px 0 22px}.intro p{color:var(--muted);font-size:17px}
-.tickets-section{background:radial-gradient(circle at 50% 20%,#211713 0,#0b090c 45%,#08070a 100%)}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:35px}.secure-note{font-size:12px;color:#aaa}
-.ticket-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.ticket-card{position:relative;background:linear-gradient(150deg,#17141a,#0e0d11);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:25px;overflow:hidden;transition:.25s}.ticket-card:hover{transform:translateY(-7px);border-color:rgba(246,184,63,.6);box-shadow:0 20px 50px rgba(0,0,0,.35)}.ticket-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--gold)}.couple:before{background:#e45a6a}.group:before{background:#9b7cff}.kids:before{background:#4bc77a}
-.ticket-top{display:flex;justify-content:space-between;color:#888;font-size:10px;font-weight:800;letter-spacing:.1em}.ticket-top span:last-child{color:var(--gold)}.ticket-icon{font-size:36px;margin:24px 0 8px}.ticket-card h3{font-family:Cinzel,serif;font-size:25px}.ticket-card p{color:#999;font-size:13px}.price{font-size:30px;font-weight:800;margin:20px 0}.price small{font-size:11px;color:#999;font-weight:500}.ticket-btn{width:100%;border:1px solid rgba(246,184,63,.5);background:transparent;color:#fff;padding:12px;border-radius:12px;font-weight:800;cursor:pointer}.ticket-btn:hover{background:var(--gold);color:#17110a}.ticket-note{text-align:center;color:#777;font-size:12px;margin-top:25px}
-.highlights{background:#0e0c11}.highlight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:35px}.highlight{padding:30px;border-radius:20px;background:#151219;border:1px solid #28242c}.highlight div{font-size:32px}.highlight h3{margin:12px 0 5px}.highlight p{font-size:13px;color:#999}
-.venue{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}.venue-copy p{color:#aaa;margin:12px 0 25px}.outline-btn{display:inline-block;border:1px solid #5c5347;border-radius:999px;padding:11px 18px;font-weight:700;font-size:13px}.outline-btn:hover{border-color:var(--gold);color:var(--gold)}.map-card{min-height:280px;border-radius:28px;background:radial-gradient(circle at 50% 45%,#2a2117,#121015 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #302a2d}.map-pin{font-size:55px;margin-bottom:12px}.map-card span{color:#888;font-size:13px}
-.final-cta{text-align:center;padding:120px 7%;background:radial-gradient(circle,#321817,#0b080a 55%)}.final-cta h2{font-size:clamp(45px,7vw,80px);margin:12px 0}.final-cta p{color:#aaa;margin-bottom:25px}
-footer{padding:30px 7%;display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #1e1b20;color:#777;font-size:11px}
-.modal{display:none;position:fixed;z-index:100;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{position:relative;width:min(480px,100%);background:#151218;border:1px solid #3b3230;border-radius:25px;padding:35px}.modal-box h2{font-size:36px;margin:10px 0}.selected-price{font-size:30px;color:var(--gold);font-weight:800}.modal-box p{color:#aaa;margin:10px 0 25px}.modal-close{position:absolute;right:18px;top:12px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.full{width:100%;justify-content:center}.modal-help{display:block;color:#777;margin-top:15px;font-size:11px}
-@media(max-width:900px){nav{display:none}.nav-cta{display:none}.menu-btn{display:block}.navbar.open nav{display:flex;position:absolute;top:65px;left:0;right:0;padding:20px 6%;background:#0d0b10;flex-direction:column}.ticket-grid,.highlight-grid{grid-template-columns:repeat(2,1fr)}.venue{grid-template-columns:1fr}}
-@media(max-width:600px){.navbar{top:30px;padding:15px 5%}.hero{padding:130px 6% 80px;background-position:65% center}h1{font-size:54px}.event-meta{gap:14px}.section{padding:75px 6%}.ticket-grid,.highlight-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column;gap:15px}footer{flex-direction:column;align-items:flex-start}}
+/* =====================================================
+   DANDIYA UTSAV 2026
+   COMPLETE STYLESHEET
+===================================================== */
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #080611;
+  color: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+button {
+  font-family: inherit;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+  --bg: #080611;
+  --bg-2: #0e0a19;
+  --bg-3: #151020;
+
+  --gold: #f4c542;
+  --gold-light: #ffe89a;
+
+  --orange: #ff7a18;
+  --pink: #ff3d81;
+
+  --white: #ffffff;
+  --text: #eeeaf4;
+  --muted: #aaa4b7;
+
+  --border: rgba(255, 255, 255, 0.10);
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENT
+===================================================== */
+
+.announcement {
+
+  width: 100%;
+
+  padding: 9px 15px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff7a18,
+      #ff3d81,
+      #ff7a18
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+
+  min-height: 74px;
+
+  padding: 0 5%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  background:
+    rgba(8, 6, 17, 0.88);
+
+  backdrop-filter: blur(16px);
+
+  border-bottom:
+    1px solid var(--border);
+
+  transition: 0.3s ease;
+
+}
+
+
+.navbar.scrolled {
+
+  background:
+    rgba(8, 6, 17, 0.98);
+
+}
+
+
+.brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: 19px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+
+}
+
+
+.brand b {
+
+  color: var(--gold);
+
+}
+
+
+.brand-mark {
+
+  color: var(--gold);
+
+  font-size: 25px;
+
+}
+
+
+#nav {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 30px;
+
+}
+
+
+#nav a {
+
+  position: relative;
+
+  color: #d9d4e1;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition: 0.3s ease;
+
+}
+
+
+#nav a::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: -7px;
+
+  width: 0;
+
+  height: 2px;
+
+  background: var(--gold);
+
+  transition: 0.3s ease;
+
+}
+
+
+#nav a:hover {
+
+  color: var(--gold);
+
+}
+
+
+#nav a:hover::after {
+
+  width: 100%;
+
+}
+
+
+.nav-cta {
+
+  padding: 11px 18px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange),
+      var(--pink)
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  transition: 0.3s ease;
+
+}
+
+
+.nav-cta:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(255, 61, 129, 0.25);
+
+}
+
+
+.menu-btn {
+
+  display: none;
+
+  border: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 27px;
+
+  cursor: pointer;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+  position: relative;
+
+  min-height: calc(100vh - 100px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 90px 5%;
+
+  overflow: hidden;
+
+
+  background-image:
+    url("assets/dandiya-poster.png");
+
+  background-size: cover;
+
+  background-position: center;
+
+}
+
+
+.hero::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 6, 17, 0.55),
+      rgba(8, 6, 17, 0.88)
+    );
+
+}
+
+
+.hero-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(8, 6, 17, 0.55) 80%
+    );
+
+}
+
+
+.hero-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1000px, 100%);
+
+}
+
+
+.eyebrow,
+.section-kicker {
+
+  color: var(--gold);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 3px;
+
+}
+
+
+.hero h1 {
+
+  margin-top: 17px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: clamp(55px, 9vw, 110px);
+
+  line-height: 0.98;
+
+  font-weight: 800;
+
+  text-transform: none;
+
+  text-shadow:
+    0 0 35px rgba(244, 197, 66, 0.20);
+
+}
+
+
+.hero h1 span {
+
+  color: var(--gold);
+
+}
+
+
+.hero-tag {
+
+  margin-top: 25px;
+
+  color: #e3dfe9;
+
+  font-size: 18px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.4px;
+
+}
+
+
+.event-meta {
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+
+  margin: 35px 0;
+
+}
+
+
+.event-meta > div {
+
+  min-width: 190px;
+
+  padding: 16px 20px;
+
+  text-align: left;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(10px);
+
+}
+
+
+.event-meta small {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--gold);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+}
+
+
+.event-meta strong {
+
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+.primary-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 14px 23px;
+
+  border: none;
+
+  border-radius: 35px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange),
+      var(--pink)
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+}
+
+
+.primary-btn:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 30px rgba(255, 61, 129, 0.25);
+
+}
+
+
+.scroll-note {
+
+  position: absolute;
+
+  z-index: 2;
+
+  bottom: 25px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: #aaa5b4;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+}
+
+
+/* =====================================================
+   GENERAL SECTION
+===================================================== */
+
+.section {
+
+  padding: 105px 5%;
+
+}
+
+
+.section h2 {
+
+  font-family: "Cinzel", serif;
+
+  font-size: clamp(36px, 5vw, 58px);
+
+  line-height: 1.12;
+
+}
+
+
+.section h2 span {
+
+  color: var(--gold);
+
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--bg),
+      var(--bg-2)
+    );
+
+}
+
+
+.intro h2 {
+
+  margin-top: 12px;
+
+}
+
+
+.intro > p {
+
+  width: min(720px, 100%);
+
+  margin: 20px auto 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
+}
+
+
+/* =====================================================
+   TICKETS
+===================================================== */
+
+.tickets-section {
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 122, 24, 0.08),
+      transparent 45%
+    ),
+    var(--bg);
+
+
+}
+
+
+.section-head {
+
+  width: min(1150px, 100%);
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+}
+
+
+.secure-note {
+
+  padding: 9px 14px;
+
+  border:
+    1px solid rgba(244, 197, 66, 0.20);
+
+  border-radius: 30px;
+
+  color: var(--gold);
+
+  background:
+    rgba(244, 197, 66, 0.05);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+
+.ticket-grid {
+
+  width: min(1150px, 100%);
+
+  margin: 55px auto 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+}
+
+
+.ticket-card {
+
+  position: relative;
+
+  padding: 25px 22px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.045),
+      rgba(255,255,255,0.018)
+    );
+
+  overflow: hidden;
+
+  transition: 0.3s ease;
+
+}
+
+
+.ticket-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--orange),
+      var(--pink)
+    );
+
+  opacity: 0;
+
+  transition: 0.3s ease;
+
+}
+
+
+.ticket-card:hover {
+
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(244, 197, 66, 0.35);
+
+}
+
+
+.ticket-card:hover::before {
+
+  opacity: 1;
+
+}
+
+
+.ticket-card.featured {
+
+  border-color:
+    rgba(244, 197, 66, 0.35);
+
+}
+
+
+.ticket-top {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #817b8d;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+}
+
+
+.ticket-icon {
+
+  margin-top: 25px;
+
+  font-size: 40px;
+
+}
+
+
+.ticket-card h3 {
+
+  margin-top: 12px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: 23px;
+
+}
+
+
+.ticket-card > p {
+
+  margin-top: 5px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+}
+
+
+.price {
+
+  margin: 15px 0 20px;
+
+  color: var(--gold);
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+}
+
+
+.price small {
+
+  color: #8e8998;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+}
+
+
+.ticket-btn {
+
+  width: 100%;
+
+  padding: 13px 8px;
+
+  border: 1px solid rgba(244, 197, 66, 0.35);
+
+  border-radius: 9px;
+
+  background:
+    rgba(244, 197, 66, 0.08);
+
+  color: var(--gold-light);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+}
+
+
+.ticket-btn:hover {
+
+  background: var(--gold);
+
+  color: #111;
+
+  transform: translateY(-2px);
+
+}
+
+
+.ticket-note {
+
+  width: min(850px, 100%);
+
+  margin: 35px auto 0;
+
+  text-align: center;
+
+  color: #817b8d;
+
+  font-size: 11px;
+
+}
+
+
+/* =====================================================
+   HIGHLIGHTS
+===================================================== */
+
+.highlights {
+
+  background: var(--bg-2);
+
+}
+
+
+.highlights > h2 {
+
+  margin-top: 12px;
+
+}
+
+
+.highlight-grid {
+
+  width: min(1100px, 100%);
+
+  margin: 55px auto 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 18px;
+
+}
+
+
+.highlight {
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255,255,255,0.025);
+
+  transition: 0.3s ease;
+
+}
+
+
+.highlight:hover {
+
+  transform: translateY(-6px);
+
+  border-color:
+    rgba(244,197,66,0.30);
+
+}
+
+
+.highlight > div {
+
+  font-size: 40px;
+
+  margin-bottom: 13px;
+
+}
+
+
+.highlight h3 {
+
+  color: var(--gold);
+
+  font-family: "Cinzel", serif;
+
+  font-size: 16px;
+
+}
+
+
+.highlight p {
+
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+}
+
+
+/* =====================================================
+   VENUE
+===================================================== */
+
+.venue {
+
+  display: grid;
+
+  grid-template-columns:
+    1.4fr 0.8fr;
+
+  align-items: center;
+
+  gap: 60px;
+
+  background: var(--bg);
+
+}
+
+
+.venue-copy h2 {
+
+  margin-top: 12px;
+
+}
+
+
+.venue-copy > p {
+
+  max-width: 650px;
+
+  margin: 20px 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+}
+
+
+.outline-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 12px 18px;
+
+  border:
+    1px solid var(--gold);
+
+  border-radius: 30px;
+
+  color: var(--gold);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  transition: 0.3s ease;
+
+}
+
+
+.outline-btn:hover {
+
+  background: var(--gold);
+
+  color: #111;
+
+}
+
+
+.map-card {
+
+  min-height: 290px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 25px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(244, 197, 66, 0.12),
+      transparent 65%
+    );
+
+}
+
+
+.map-pin {
+
+  font-size: 55px;
+
+  margin-bottom: 10px;
+
+}
+
+
+.map-card strong {
+
+  font-family: "Cinzel", serif;
+
+  color: var(--gold);
+
+  font-size: 23px;
+
+}
+
+
+.map-card span {
+
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+}
+
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.final-cta {
+
+  padding: 115px 5%;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 61, 129, 0.12),
+      transparent 60%
+    ),
+    var(--bg-2);
+
+}
+
+
+.final-cta h2 {
+
+  margin-top: 10px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: clamp(40px, 6vw, 70px);
+
+}
+
+
+.final-cta h2 span {
+
+  color: var(--gold);
+
+}
+
+
+.final-cta p {
+
+  margin: 18px auto 28px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+  padding: 35px 5%;
+
+  border-top:
+    1px solid var(--border);
+
+  background: #05040a;
+
+}
+
+
+.footer-brand {
+
+  width: min(1100px, 100%);
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+}
+
+
+footer p {
+
+  color: #777181;
+
+  font-size: 11px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 2000;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(8px);
+
+}
+
+
+.modal.active {
+
+  display: flex;
+
+}
+
+
+.modal-box {
+
+  position: relative;
+
+  width: min(450px, 100%);
+
+  padding: 40px 30px;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(244,197,66,0.25);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #171124,
+      #0d0a17
+    );
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,0.60);
+
+  animation:
+    modalIn 0.25s ease;
+
+}
+
+
+@keyframes modalIn {
+
+  from {
+
+    opacity: 0;
+
+    transform: scale(0.92);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+  }
+
+}
+
+
+.modal-close {
+
+  position: absolute;
+
+  top: 12px;
+
+  right: 16px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+}
+
+
+.modal-ticket-icon {
+
+  margin: 12px 0;
+
+  font-size: 45px;
+
+}
+
+
+.modal-box h2 {
+
+  margin-top: 5px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: 28px;
+
+}
+
+
+.selected-price {
+
+  margin: 8px 0;
+
+  color: var(--gold);
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+}
+
+
+.coming-soon-title {
+
+  margin-top: 12px;
+
+  color: var(--gold);
+
+  font-size: 16px;
+
+}
+
+
+.modal-box p {
+
+  margin: 12px 0 20px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+}
+
+
+.full {
+
+  width: 100%;
+
+}
+
+
+.modal-help {
+
+  display: block;
+
+  margin-top: 16px;
+
+  color: #716c7b;
+
+  font-size: 10px;
+
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+#nav.mobile-open {
+
+  display: flex;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+
+  .ticket-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+  .highlight-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+}
+
+
+@media (max-width: 800px) {
+
+
+  .navbar {
+
+    min-height: 68px;
+
+  }
+
+
+  #nav {
+
+    display: none;
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 20px;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background:
+      rgba(8, 6, 17, 0.98);
+
+    border-bottom:
+      1px solid var(--border);
+
+  }
+
+
+  #nav.mobile-open {
+
+    display: flex;
+
+  }
+
+
+  .nav-cta {
+
+    display: none;
+
+  }
+
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+
+  .venue {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .footer-brand {
+
+    flex-direction: column;
+
+    text-align: center;
+
+  }
+
+
+}
+
+
+@media (max-width: 600px) {
+
+
+  .announcement {
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+  }
+
+
+  .brand {
+
+    font-size: 16px;
+
+  }
+
+
+  .hero {
+
+    min-height: 90vh;
+
+    padding: 70px 5%;
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 50px;
+
+  }
+
+
+  .hero-tag {
+
+    font-size: 14px;
+
+  }
+
+
+  .event-meta {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+  }
+
+
+  .event-meta > div {
+
+    min-width: 0;
+
+    text-align: center;
+
+  }
+
+
+  .section {
+
+    padding: 80px 5%;
+
+  }
+
+
+  .section-head {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+
+  .ticket-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .highlight-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .map-card {
+
+    min-height: 230px;
+
+  }
+
+
+  .scroll-note {
+
+    display: none;
+
+  }
+
+
+}
+
+
+@media (max-width: 400px) {
+
+
+  .hero h1 {
+
+    font-size: 42px;
+
+  }
+
+
+  .primary-btn {
+
+    width: 100%;
+
+  }
+
+
+  .modal-box {
+
+    padding: 35px 20px;
+
+  }
+
+}
