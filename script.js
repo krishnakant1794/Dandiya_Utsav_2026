@@ -1,49 +1,242 @@
-// =============================
-// DANDIYA UTSAV 2026
-// Replace this URL with the public Vihaya checkout/event URL.
-// Example: https://events.vihaya.app/events/your-event-slug
-// =============================
-const VIHAYA_CHECKOUT_URL = "PASTE_YOUR_VIHAYA_EVENT_URL_HERE";
+/* =====================================================
+   DANDIYA UTSAV 2026
+   JAVASCRIPT
+===================================================== */
 
-const modal = document.getElementById("bookingModal");
-const selectedTicket = document.getElementById("selectedTicket");
-const selectedPrice = document.getElementById("selectedPrice");
-const vihayaLink = document.getElementById("vihayaLink");
 
-document.querySelectorAll(".ticket-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    selectedTicket.textContent = btn.dataset.ticket;
-    selectedPrice.textContent = "₹" + Number(btn.dataset.price).toLocaleString("en-IN");
+/* =====================================================
+   MOBILE NAVIGATION
+===================================================== */
 
-    if (VIHAYA_CHECKOUT_URL.startsWith("http")) {
-      vihayaLink.href = VIHAYA_CHECKOUT_URL;
-      vihayaLink.textContent = "Continue to Ticket Checkout →";
-      vihayaLink.style.opacity = "1";
-      vihayaLink.style.pointerEvents = "auto";
-    } else {
-      vihayaLink.href = "#";
-      vihayaLink.textContent = "Add Vihaya Link in script.js";
-      vihayaLink.style.opacity = ".55";
-      vihayaLink.style.pointerEvents = "none";
-    }
+const menuBtn =
+  document.querySelector(".menu-btn");
 
-    modal.classList.add("show");
-    modal.setAttribute("aria-hidden", "false");
+const nav =
+  document.getElementById("nav");
+
+
+if (menuBtn && nav) {
+
+  menuBtn.addEventListener("click", () => {
+
+    nav.classList.toggle("mobile-open");
+
   });
-});
 
-document.querySelector(".modal-close").addEventListener("click", closeModal);
-modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-
-function closeModal() {
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden", "true");
 }
 
-document.querySelector(".menu-btn").addEventListener("click", () => {
-  document.querySelector(".navbar").classList.toggle("open");
+
+/* =====================================================
+   CLOSE MOBILE MENU AFTER CLICK
+===================================================== */
+
+const navLinks =
+  document.querySelectorAll("#nav a");
+
+
+navLinks.forEach((link) => {
+
+  link.addEventListener("click", () => {
+
+    nav.classList.remove("mobile-open");
+
+  });
+
 });
 
-document.querySelectorAll("nav a").forEach(a => {
-  a.addEventListener("click", () => document.querySelector(".navbar").classList.remove("open"));
+
+/* =====================================================
+   BOOKING MODAL
+===================================================== */
+
+const bookingModal =
+  document.getElementById("bookingModal");
+
+
+const modalClose =
+  document.querySelector(".modal-close");
+
+
+const modalCloseBtn =
+  document.getElementById("modalCloseBtn");
+
+
+const selectedTicket =
+  document.getElementById("selectedTicket");
+
+
+const selectedPrice =
+  document.getElementById("selectedPrice");
+
+
+/* =====================================================
+   TICKET BUTTONS
+===================================================== */
+
+const ticketButtons =
+  document.querySelectorAll(".ticket-btn");
+
+
+ticketButtons.forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+
+    const ticketName =
+      button.dataset.ticket;
+
+
+    const ticketPrice =
+      button.dataset.price;
+
+
+    selectedTicket.textContent =
+      ticketName;
+
+
+    selectedPrice.textContent =
+      "₹" +
+      Number(ticketPrice)
+        .toLocaleString("en-IN");
+
+
+    bookingModal.classList.add("active");
+
+
+    bookingModal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+
+    document.body.style.overflow =
+      "hidden";
+
+
+  });
+
 });
+
+
+/* =====================================================
+   CLOSE MODAL FUNCTION
+===================================================== */
+
+function closeModal() {
+
+  bookingModal.classList.remove("active");
+
+
+  bookingModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+if (modalClose) {
+
+  modalClose.addEventListener(
+    "click",
+    closeModal
+  );
+
+}
+
+
+if (modalCloseBtn) {
+
+  modalCloseBtn.addEventListener(
+    "click",
+    closeModal
+  );
+
+}
+
+
+/* =====================================================
+   CLOSE WHEN CLICKING OUTSIDE
+===================================================== */
+
+bookingModal.addEventListener(
+  "click",
+  (event) => {
+
+    if (event.target === bookingModal) {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (event.key === "Escape") {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   NAVBAR SCROLL EFFECT
+===================================================== */
+
+const navbar =
+  document.querySelector(".navbar");
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (!navbar) return;
+
+
+    if (window.scrollY > 40) {
+
+      navbar.classList.add("scrolled");
+
+    } else {
+
+      navbar.classList.remove("scrolled");
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   CONSOLE MESSAGE
+===================================================== */
+
+console.log(
+  "🎉 Dandiya Utsav 2026 website loaded successfully!"
+);
+
+
+console.log(
+  "🎟️ Ticket status: Tickets Will Be Live Soon"
+);
