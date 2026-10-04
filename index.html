@@ -1,202 +1,1022 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Dandiya Utsav 2026 - Ranchi's festive Dandiya night."
-    >
-
-    <meta
-        name="theme-color"
-        content="#08030f"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dandiya Utsav 2026 | Ranchi</title>
 
+    <meta name="description"
+        content="Dandiya Utsav 2026 - Ranchi's biggest Dandiya celebration. 16 October 2026, 6 PM onwards at Shahid Sankalp Children Park, Morabadi, Ranchi.">
 
-    <!-- Google Fonts -->
+    <meta name="theme-color" content="#0b0615">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+        /* =========================
+           RESET
+        ========================= */
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <!-- CSS -->
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(255, 90, 0, .15), transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(180, 0, 255, .16), transparent 30%),
+                #080510;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        body.menu-open {
+            overflow: hidden;
+        }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           LOADER
+        ========================= */
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #080510;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity .5s ease, visibility .5s ease;
+        }
+
+        #loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-icon {
+            font-size: 55px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader-text {
+            margin-top: 12px;
+            color: #ff9f1c;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            background: linear-gradient(90deg, #ff4d00, #ff8a00, #ff2f92);
+            color: white;
+            text-align: center;
+            padding: 9px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            position: relative;
+            z-index: 5000;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: fixed;
+            top: 36px;
+            left: 0;
+            width: 100%;
+            height: 82px;
+            z-index: 5000;
+
+            background: rgba(8, 5, 16, .85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            height: 100%;
+            margin: auto;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: .5px;
+        }
+
+        .logo span {
+            color: #ff7a00;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .desktop-nav a {
+            color: #ddd;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .25s;
+        }
+
+        .desktop-nav a:hover {
+            color: #ff9f1c;
+        }
+
+        .desktop-book {
+            background: linear-gradient(135deg, #ff5b00, #ff007a);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 8px 25px rgba(255, 70, 0, .25);
+        }
+
+        /* =========================
+           MOBILE BUTTON
+        ========================= */
+
+        .menu-button {
+            display: none;
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 12px;
+            background: rgba(255,255,255,.06);
+            cursor: pointer;
+            position: relative;
+            z-index: 6000;
+        }
+
+        .menu-button span {
+            position: absolute;
+            left: 12px;
+            width: 22px;
+            height: 2px;
+            background: white;
+            border-radius: 10px;
+            transition: .25s;
+        }
+
+        .menu-button span:nth-child(1) {
+            top: 15px;
+        }
+
+        .menu-button span:nth-child(2) {
+            top: 22px;
+        }
+
+        .menu-button span:nth-child(3) {
+            top: 29px;
+        }
+
+        .menu-button.is-open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-button.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.is-open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.72);
+            backdrop-filter: blur(5px);
+            z-index: 5400;
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: .25s;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 130px;
+            left: 14px;
+            right: 14px;
+
+            z-index: 5500;
+
+            padding: 22px;
+
+            border-radius: 22px;
+            background:
+                linear-gradient(145deg,
+                    rgba(34,18,55,.98),
+                    rgba(10,7,20,.98));
+
+            border: 1px solid rgba(255,255,255,.12);
+
+            box-shadow: 0 30px 80px rgba(0,0,0,.7);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transform: translateY(-15px) scale(.97);
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease,
+                visibility .25s ease;
+        }
+
+        .mobile-drawer.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .mobile-menu-title {
+            font-size: 12px;
+            color: #ff9f1c;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .mobile-link {
+            display: block;
+            padding: 15px 10px;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .mobile-ticket-btn {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff5b00, #ff007a);
+            font-weight: 900;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 180px 20px 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            text-align: center;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: #ff5400;
+            opacity: .08;
+            filter: blur(100px);
+            border-radius: 50%;
+            top: 10%;
+            left: -200px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #b000ff;
+            opacity: .09;
+            filter: blur(100px);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -100px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,159,28,.35);
+            border-radius: 30px;
+            color: #ffb02e;
+            background: rgba(255,159,28,.07);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 9vw, 100px);
+            line-height: .95;
+            font-weight: 950;
+            letter-spacing: -4px;
+
+            background: linear-gradient(
+                135deg,
+                #fff,
+                #ffb52d,
+                #ff5c00,
+                #ff2294
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            margin-top: 24px;
+            font-size: clamp(17px, 2.5vw, 24px);
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        .hero-date {
+            margin-top: 18px;
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 24px;
+            border-radius: 13px;
+
+            font-weight: 900;
+            font-size: 14px;
+
+            transition: .25s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff5b00, #ff007a);
+            box-shadow: 0 15px 40px rgba(255,65,0,.25);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,.16);
+            background: rgba(255,255,255,.05);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        .countdown {
+            margin: 40px auto 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            width: 95px;
+            padding: 15px 8px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 14px;
+        }
+
+        .time-box strong {
+            display: block;
+            font-size: 27px;
+            color: #ffad28;
+        }
+
+        .time-box span {
+            font-size: 10px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section {
+            padding: 90px 20px;
+        }
+
+        .section-container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-label {
+            color: #ff8d16;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(34px, 5vw, 55px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .section-text {
+            color: #aaa;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .about-card {
+            padding: 30px;
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.07),
+                rgba(255,255,255,.025)
+            );
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .about-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .about-card h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .about-card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           EXPERIENCE
+        ========================= */
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .experience-card {
+            padding: 30px 22px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .experience-card .icon {
+            font-size: 38px;
+            margin-bottom: 16px;
+        }
+
+        .experience-card h3 {
+            margin-bottom: 9px;
+        }
+
+        .experience-card p {
+            color: #999;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* =========================
+           TICKET SECTION
+        ========================= */
+
+        .ticket-section {
+            background:
+                radial-gradient(circle at 50% 0,
+                    rgba(255,70,0,.10),
+                    transparent 45%);
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 35px;
+        }
+
+        .ticket-card {
+            position: relative;
+            padding: 27px 20px;
+            border-radius: 22px;
+            background: linear-gradient(
+                150deg,
+                rgba(255,255,255,.07),
+                rgba(255,255,255,.025)
+            );
+            border: 1px solid rgba(255,255,255,.09);
+            overflow: hidden;
+        }
+
+        .ticket-card::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #ff5b00;
+            opacity: .08;
+            border-radius: 50%;
+            top: -40px;
+            right: -40px;
+        }
+
+        .ticket-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .ticket-price {
+            font-size: 32px;
+            font-weight: 950;
+            color: #ffad28;
+            margin-bottom: 18px;
+        }
+
+        .ticket-card a {
+            display: block;
+            text-align: center;
+            padding: 11px;
+            border-radius: 10px;
+            background: rgba(255,255,255,.07);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           BOOKING PLATFORMS
+        ========================= */
+
+        .booking-section {
+            padding-top: 40px;
+        }
+
+        .booking-box {
+            margin-top: 30px;
+            padding: 35px;
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,75,0,.10),
+                    rgba(168,0,255,.10)
+                );
+
+            border: 1px solid rgba(255,255,255,.10);
+        }
+
+        .booking-title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .booking-subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .booking-card {
+            min-height: 180px;
+            padding: 22px;
+
+            border-radius: 18px;
+            background: rgba(0,0,0,.25);
+            border: 1px solid rgba(255,255,255,.08);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition: .25s;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,159,28,.35);
+        }
+
+        .booking-logo {
+            font-size: 23px;
+            font-weight: 950;
+        }
+
+        .booking-card p {
+            color: #999;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 12px 0 18px;
+        }
+
+        .booking-btn {
+            display: block;
+            text-align: center;
+            padding: 11px;
+            border-radius: 10px;
+            background: linear-gradient(135deg,#ff5b00,#ff007a);
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        /* =========================
+           VENUE
+        ========================= */
+
+        .venue-card {
+            margin-top: 30px;
+            padding: 35px;
+
+            border-radius: 25px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .venue-card h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .venue-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FINAL CTA
+        ========================= */
+
+        .cta {
+            text-align: center;
+            padding: 110px 20px;
+
+            background:
+                radial-gradient(circle at center,
+                    rgba(255,75,0,.14),
+                    transparent 55%);
+        }
+
+        .cta h2 {
+            font-size: clamp(38px, 7vw, 75px);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #aaa;
+            margin-bottom: 28px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,.07);
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #fff;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .desktop-nav,
+            .desktop-book {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .booking-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                font-size: 11px;
+            }
+
+            .navbar {
+                top: 31px;
+                height: 78px;
+            }
+
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .hero {
+                padding-top: 155px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .countdown {
+                gap: 6px;
+            }
+
+            .time-box {
+                width: 72px;
+                padding: 12px 5px;
+            }
+
+            .time-box strong {
+                font-size: 21px;
+            }
+
+            section {
+                padding: 70px 16px;
+            }
+
+            .experience-grid,
+            .ticket-grid,
+            .booking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-box {
+                padding: 22px 15px;
+            }
+
+            .venue-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 25px;
+            }
+
+            .mobile-drawer {
+                top: 120px;
+            }
+
+        }
+
+        @media (max-width: 380px) {
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .menu-button {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+                animation: none !important;
+            }
+
+        }
+
+    </style>
 </head>
-
 
 <body>
 
+    <!-- =========================
+         LOADER
+    ========================= -->
 
-    <!-- ==================================================
-         PAGE LOADER
-    =================================================== -->
-
-    <div id="loader" class="loader">
-
-        <div class="loader-star">✦</div>
-
-        <div class="loader-title">
-            DANDIYA UTSAV
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-icon">🪩</div>
+            <div class="loader-text">DANDIYA UTSAV</div>
         </div>
-
-        <div class="loader-year">
-            2026
-        </div>
-
-        <div class="loader-line"></div>
-
-        <p>
-            GET READY TO DANCE
-        </p>
-
     </div>
 
 
-
-    <!-- ==================================================
+    <!-- =========================
          TOP BAR
-    =================================================== -->
+    ========================= -->
 
     <div class="topbar">
-
-        <span>
-            ✦ NAVRATRI 2026 • RANCHI
-        </span>
-
-        <span>
-            16 OCTOBER 2026
-        </span>
-
+        ✨ 16 OCTOBER 2026 • RANCHI • 6:00 PM ONWARDS ✨
     </div>
 
 
-
-    <!-- ==================================================
-         HEADER
-    =================================================== -->
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
     <header class="navbar">
 
+        <div class="nav-container">
 
-        <!-- LOGO -->
-
-        <a href="#home" class="brand">
-
-            <span class="brand-symbol">
-                ✦
-            </span>
-
-            <span class="brand-content">
-
-                <strong>
-                    DANDIYA
-                </strong>
-
-                <small>
-                    UTSAV 2026
-                </small>
-
-            </span>
-
-        </a>
-
-
-
-        <!-- DESKTOP NAVIGATION -->
-
-        <nav class="desktop-nav">
-
-            <a href="#about">
-                ABOUT
+            <a href="#home" class="logo">
+                DANDIYA <span>UTSAV</span>
             </a>
 
-            <a href="#experience">
-                EXPERIENCE
+            <nav class="desktop-nav">
+
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#tickets">Tickets</a>
+                <a href="#venue">Venue</a>
+                <a href="#booking">Book Tickets</a>
+
+            </nav>
+
+            <a
+                class="desktop-book"
+                href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
+                target="_blank"
+                rel="noopener"
+            >
+                BOOK NOW
             </a>
 
-            <a href="#tickets">
-                TICKETS
-            </a>
+            <button
+                id="menuButton"
+                class="menu-button"
+                aria-label="Open menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-            <a href="#venue">
-                VENUE
-            </a>
-
-        </nav>
-
-
-
-        <!-- DESKTOP BOOK BUTTON -->
-
-        <a
-            href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="desktop-book"
-        >
-            BOOK NOW
-            <span>↗</span>
-        </a>
-
-
-
-        <!-- MOBILE MENU BUTTON -->
-
-        <button
-            id="menuButton"
-            class="menu-button"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-        >
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
-
+        </div>
 
     </header>
 
 
-
-    <!-- ==================================================
+    <!-- =========================
          MOBILE OVERLAY
-    =================================================== -->
+    ========================= -->
 
-    <div
-        id="mobileOverlay"
-        class="mobile-overlay"
-    ></div>
+    <div id="mobileOverlay" class="mobile-overlay"></div>
 
 
-
-    <!-- ==================================================
+    <!-- =========================
          MOBILE DRAWER
-    =================================================== -->
+    ========================= -->
 
     <aside
         id="mobileDrawer"
@@ -204,1020 +1024,928 @@
         aria-hidden="true"
     >
 
-
-        <div class="drawer-top">
-
-            <div>
-
-                <span class="drawer-label">
-                    NAVIGATION
-                </span>
-
-                <strong>
-                    DANDIYA UTSAV
-                </strong>
-
-            </div>
-
-
-            <button
-                id="drawerClose"
-                class="drawer-close"
-                type="button"
-                aria-label="Close menu"
-            >
-                ×
-            </button>
-
+        <div class="mobile-menu-title">
+            Explore Dandiya Utsav
         </div>
 
+        <a class="mobile-link" href="#about">
+            About
+        </a>
 
+        <a class="mobile-link" href="#experience">
+            Experience
+        </a>
 
-        <div class="drawer-links">
+        <a class="mobile-link" href="#tickets">
+            Tickets
+        </a>
 
-            <a
-                href="#about"
-                class="drawer-link"
-            >
-                <span>01</span>
-                ABOUT
-                <b>→</b>
-            </a>
+        <a class="mobile-link" href="#venue">
+            Venue
+        </a>
 
+        <a class="mobile-link" href="#booking">
+            Booking Platforms
+        </a>
 
-            <a
-                href="#experience"
-                class="drawer-link"
-            >
-                <span>02</span>
-                EXPERIENCE
-                <b>→</b>
-            </a>
-
-
-            <a
-                href="#tickets"
-                class="drawer-link"
-            >
-                <span>03</span>
-                TICKETS
-                <b>→</b>
-            </a>
-
-
-            <a
-                href="#venue"
-                class="drawer-link"
-            >
-                <span>04</span>
-                VENUE
-                <b>→</b>
-            </a>
-
-        </div>
-
-
-
-        <div class="drawer-bottom">
-
-            <p>
-                16 OCTOBER 2026
-            </p>
-
-            <a
-                href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="drawer-book"
-            >
-                BOOK YOUR TICKET
-                <span>↗</span>
-            </a>
-
-        </div>
-
+        <a
+            class="mobile-ticket-btn"
+            href="#booking"
+        >
+            🎟️ BOOK YOUR TICKET
+        </a>
 
     </aside>
 
 
-
-    <!-- ==================================================
-         MAIN
-    =================================================== -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <main>
 
-
-        <!-- ==================================================
-             HERO
-        =================================================== -->
-
-        <section
-            id="home"
-            class="hero"
-        >
-
-
-            <div class="hero-glow glow-a"></div>
-
-            <div class="hero-glow glow-b"></div>
-
-
-            <!-- Decorative sticks -->
-
-            <div class="stick stick-a"></div>
-
-            <div class="stick stick-b"></div>
-
-
-            <!-- Hero content -->
+        <section id="home" class="hero">
 
             <div class="hero-content">
 
-
-                <div class="hero-kicker">
-                    ✦ SK EVENTS PRESENTS ✦
+                <div class="hero-badge">
+                    ✨ NAVRATRI • RANCHI 2026
                 </div>
-
 
                 <h1>
-
-                    DANDIYA
-
-                    <span>
-                        UTSAV
-                    </span>
-
-                    <small>
-                        2026
-                    </small>
-
+                    DANDIYA<br>
+                    UTSAV
                 </h1>
 
-
-                <div class="hero-divider">
-
-                    <i></i>
-
-                    <span>
-                        DANCE • CELEBRATE • CREATE MEMORIES
-                    </span>
-
-                    <i></i>
-
-                </div>
-
-
-                <p class="hero-description">
-
-                    An unforgettable evening of music,
-                    colours, culture and Dandiya vibes.
-                    Bring your friends and family and
-                    celebrate Navratri like never before.
-
+                <p class="hero-subtitle">
+                    One Night. One Beat. Endless Memories.
                 </p>
 
+                <p class="hero-date">
+                    📅 16 October 2026 &nbsp; | &nbsp;
+                    🕕 6:00 PM Onwards
+                </p>
 
-                <div class="hero-actions">
-
+                <div class="hero-buttons">
 
                     <a
-                        href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="primary-button"
+                        class="btn btn-primary"
+                        href="#booking"
                     >
-
-                        <span>
-                            GET YOUR TICKETS
-                        </span>
-
-                        <b>
-                            →
-                        </b>
-
+                        🎟️ GET YOUR TICKETS
                     </a>
 
-
                     <a
-                        href="#experience"
-                        class="secondary-button"
+                        class="btn btn-secondary"
+                        href="#venue"
                     >
-
-                        EXPLORE EVENT
-
-                        <span>
-                            ↓
-                        </span>
-
+                        📍 VIEW VENUE
                     </a>
 
                 </div>
 
 
-                <!-- Event details -->
-
-                <div class="hero-details">
-
-
-                    <div>
-
-                        <small>
-                            DATE
-                        </small>
-
-                        <strong>
-                            16 OCT 2026
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <small>
-                            TIME
-                        </small>
-
-                        <strong>
-                            6:00 PM
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <small>
-                            LOCATION
-                        </small>
-
-                        <strong>
-                            MORABADI, RANCHI
-                        </strong>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- Hero visual -->
-
-            <div class="hero-art">
-
-
-                <div class="moon"></div>
-
-
-                <div class="arch arch-one"></div>
-
-                <div class="arch arch-two"></div>
-
-
-                <div class="dancer dancer-one">
-                    💃
-                </div>
-
-                <div class="dancer dancer-two">
-                    🕺
-                </div>
-
-                <div class="dancer dancer-three">
-                    💃
-                </div>
-
-
-                <div class="art-floor"></div>
-
-
-                <div class="art-lights">
-                    ✦　✦　✦　✦　✦　✦
-                </div>
-
-
-            </div>
-
-
-            <div class="scroll-hint">
-                SCROLL TO DISCOVER ↓
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ==================================================
-             COUNTDOWN
-        =================================================== -->
-
-        <section class="countdown-section">
-
-            <div class="countdown-wrap">
-
-
-                <div class="countdown-heading">
-
-                    <small>
-                        THE NIGHT IS COMING
-                    </small>
-
-                    <h2>
-                        COUNTDOWN
-                        <span>BEGINS</span>
-                    </h2>
-
-                </div>
-
+                <!-- COUNTDOWN -->
 
                 <div class="countdown">
 
-
-                    <div class="count-box">
-
-                        <strong id="days">
-                            00
-                        </strong>
-
-                        <small>
-                            DAYS
-                        </small>
-
+                    <div class="time-box">
+                        <strong id="days">00</strong>
+                        <span>Days</span>
                     </div>
 
-
-                    <em>:</em>
-
-
-                    <div class="count-box">
-
-                        <strong id="hours">
-                            00
-                        </strong>
-
-                        <small>
-                            HOURS
-                        </small>
-
+                    <div class="time-box">
+                        <strong id="hours">00</strong>
+                        <span>Hours</span>
                     </div>
 
-
-                    <em>:</em>
-
-
-                    <div class="count-box">
-
-                        <strong id="minutes">
-                            00
-                        </strong>
-
-                        <small>
-                            MIN
-                        </small>
-
+                    <div class="time-box">
+                        <strong id="minutes">00</strong>
+                        <span>Minutes</span>
                     </div>
 
-
-                    <em>:</em>
-
-
-                    <div class="count-box">
-
-                        <strong id="seconds">
-                            00
-                        </strong>
-
-                        <small>
-                            SEC
-                        </small>
-
+                    <div class="time-box">
+                        <strong id="seconds">00</strong>
+                        <span>Seconds</span>
                     </div>
-
 
                 </div>
-
 
             </div>
 
         </section>
 
 
-
-        <!-- ==================================================
+        <!-- =========================
              ABOUT
-        =================================================== -->
+        ========================= -->
 
-        <section
-            id="about"
-            class="section about"
-        >
+        <section id="about">
 
+            <div class="section-container">
 
-            <div class="about-heading">
+                <div class="about-grid">
 
-                <small class="section-label">
-                    THE FESTIVAL
-                </small>
+                    <div>
 
-                <h2>
+                        <div class="section-label">
+                            ABOUT THE EVENT
+                        </div>
 
-                    WHERE
+                        <h2 class="section-title">
+                            Where Culture<br>
+                            Meets Celebration.
+                        </h2>
 
-                    <span>
-                        TRADITION
-                    </span>
+                        <p class="section-text">
+                            Get ready for an unforgettable Navratri
+                            celebration filled with energetic Dandiya,
+                            vibrant lights, music, food and thousands
+                            of festive memories.
+                        </p>
 
-                    MEETS
+                    </div>
 
-                    <span>
-                        ENERGY.
-                    </span>
+                    <div class="about-card">
 
-                </h2>
+                        <div class="about-icon">
+                            🪩
+                        </div>
 
-            </div>
+                        <h3>
+                            Dandiya Utsav 2026
+                        </h3>
 
+                        <p>
+                            A vibrant evening designed to bring
+                            Ranchi together for an energetic
+                            Navratri celebration.
+                        </p>
 
-            <div class="about-content">
-
-                <p>
-
-                    Get ready for a spectacular night
-                    filled with rhythm, colour, lights
-                    and unforgettable Dandiya moments.
-
-                </p>
-
-
-                <p>
-
-                    Come with your friends, your partner
-                    or your family and celebrate the
-                    festive spirit of Navratri together.
-
-                </p>
-
-
-                <div class="about-tags">
-
-                    <span>
-                        ✦ MUSIC
-                    </span>
-
-                    <span>
-                        ✦ DANCE
-                    </span>
-
-                    <span>
-                        ✦ CULTURE
-                    </span>
-
-                    <span>
-                        ✦ MEMORIES
-                    </span>
+                    </div>
 
                 </div>
 
             </div>
 
-
         </section>
 
 
-
-        <!-- ==================================================
+        <!-- =========================
              EXPERIENCE
-        =================================================== -->
+        ========================= -->
 
-        <section
-            id="experience"
-            class="section experience"
-        >
+        <section id="experience">
 
+            <div class="section-container">
 
-            <div class="section-heading">
+                <div class="section-label">
+                    THE EXPERIENCE
+                </div>
 
-                <small class="section-label">
-                    WHAT'S WAITING
-                </small>
-
-                <h2>
-
-                    ONE NIGHT.
-
-                    <span>
-                        MANY MEMORIES.
-                    </span>
-
+                <h2 class="section-title">
+                    More Than Just<br>
+                    Dandiya.
                 </h2>
 
-            </div>
+                <div class="experience-grid">
 
+                    <div class="experience-card">
 
-            <div class="experience-grid">
+                        <div class="icon">
+                            🥁
+                        </div>
 
+                        <h3>
+                            Live Music & DJ
+                        </h3>
 
-                <article class="experience-card large">
+                        <p>
+                            Dance all night to energetic
+                            beats and festive music.
+                        </p>
 
-                    <div class="experience-icon">
-                        🎧
                     </div>
 
-                    <small>
-                        01
-                    </small>
 
-                    <h3>
-                        LIVE DJ
-                    </h3>
+                    <div class="experience-card">
 
-                    <p>
-                        Non-stop festive beats
-                        made for dancing.
-                    </p>
+                        <div class="icon">
+                            💃
+                        </div>
 
-                </article>
+                        <h3>
+                            Dandiya Night
+                        </h3>
 
+                        <p>
+                            Experience the traditional
+                            Garba and Dandiya celebration.
+                        </p>
 
-                <article class="experience-card">
-
-                    <div class="experience-icon">
-                        💃
                     </div>
 
-                    <small>
-                        02
-                    </small>
 
-                    <h3>
-                        DANDIYA
-                    </h3>
+                    <div class="experience-card">
 
-                    <p>
-                        Dance, twirl and celebrate
-                        with your people.
-                    </p>
+                        <div class="icon">
+                            🍴
+                        </div>
 
-                </article>
+                        <h3>
+                            Food & Stalls
+                        </h3>
 
+                        <p>
+                            Enjoy delicious food and
+                            festive shopping experiences.
+                        </p>
 
-                <article class="experience-card">
-
-                    <div class="experience-icon">
-                        🍴
                     </div>
 
-                    <small>
-                        03
-                    </small>
 
-                    <h3>
-                        FOOD & STALLS
-                    </h3>
+                    <div class="experience-card">
 
-                    <p>
-                        Delicious food and
-                        festive shopping.
-                    </p>
+                        <div class="icon">
+                            📸
+                        </div>
 
-                </article>
+                        <h3>
+                            Photo Moments
+                        </h3>
 
+                        <p>
+                            Capture colourful moments
+                            with your friends and family.
+                        </p>
 
-                <article class="experience-card">
-
-                    <div class="experience-icon">
-                        📸
                     </div>
 
-                    <small>
-                        04
-                    </small>
 
-                    <h3>
-                        PHOTO MOMENTS
-                    </h3>
+                    <div class="experience-card">
 
-                    <p>
-                        Capture moments
-                        worth remembering.
-                    </p>
+                        <div class="icon">
+                            ✨
+                        </div>
 
-                </article>
+                        <h3>
+                            Festive Vibes
+                        </h3>
 
+                        <p>
+                            Lights, colours, music and
+                            the ultimate Navratri atmosphere.
+                        </p>
 
-                <article class="experience-card">
-
-                    <div class="experience-icon">
-                        ✨
                     </div>
 
-                    <small>
-                        05
-                    </small>
 
-                    <h3>
-                        FESTIVE VIBES
-                    </h3>
+                    <div class="experience-card">
 
-                    <p>
-                        Lights, colours,
-                        music and energy.
-                    </p>
+                        <div class="icon">
+                            ❤️
+                        </div>
 
-                </article>
+                        <h3>
+                            Family Friendly
+                        </h3>
 
+                        <p>
+                            Bring your friends and family
+                            for a memorable festive night.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
-
 
         </section>
 
 
-
-        <!-- ==================================================
+        <!-- =========================
              TICKETS
-        =================================================== -->
+        ========================= -->
 
-        <section
-            id="tickets"
-            class="section tickets"
-        >
+        <section id="tickets" class="ticket-section">
 
+            <div class="section-container">
 
-            <div class="section-heading centered">
+                <div class="section-label">
+                    TICKET CATEGORIES
+                </div>
 
-                <small class="section-label">
-                    ENTRY PASSES
-                </small>
-
-                <h2>
-
-                    YOUR NIGHT.
-
-                    <span>
-                        YOUR PASS.
-                    </span>
-
+                <h2 class="section-title">
+                    Pick Your Pass.
                 </h2>
 
-                <p>
-                    Book through the official
-                    BookMyShow event page.
-                </p>
+                <div class="ticket-grid">
+
+                    <div class="ticket-card">
+
+                        <h3>
+                            STAG
+                        </h3>
+
+                        <div class="ticket-price">
+                            ₹399
+                        </div>
+
+                        <a href="#booking">
+                            BOOK TICKET
+                        </a>
+
+                    </div>
+
+
+                    <div class="ticket-card">
+
+                        <h3>
+                            COUPLE
+                        </h3>
+
+                        <div class="ticket-price">
+                            ₹699
+                        </div>
+
+                        <a href="#booking">
+                            BOOK TICKET
+                        </a>
+
+                    </div>
+
+
+                    <div class="ticket-card">
+
+                        <h3>
+                            GROUP PASS
+                        </h3>
+
+                        <div class="ticket-price">
+                            ₹1,749
+                        </div>
+
+                        <a href="#booking">
+                            BOOK TICKET
+                        </a>
+
+                    </div>
+
+
+                    <div class="ticket-card">
+
+                        <h3>
+                            KIDS
+                        </h3>
+
+                        <div class="ticket-price">
+                            ₹199
+                        </div>
+
+                        <a href="#booking">
+                            BOOK TICKET
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
-
-
-            <div class="ticket-grid">
-
-
-                <!-- STAG -->
-
-                <article class="ticket-card">
-
-                    <div class="ticket-top">
-                        <span>01</span>
-                    </div>
-
-                    <div class="ticket-icon">
-                        🕺
-                    </div>
-
-                    <h3>
-                        STAG
-                    </h3>
-
-                    <p>
-                        Single entry
-                    </p>
-
-                    <strong class="ticket-price">
-                        ₹399
-                        <small>
-                            / PERSON
-                        </small>
-                    </strong>
-
-                    <a
-                        href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="ticket-button"
-                    >
-                        BOOK NOW →
-                    </a>
-
-                </article>
-
-
-
-                <!-- COUPLE -->
-
-                <article class="ticket-card featured">
-
-                    <div class="popular-badge">
-                        POPULAR
-                    </div>
-
-                    <div class="ticket-top">
-                        <span>02</span>
-                    </div>
-
-                    <div class="ticket-icon">
-                        💃🕺
-                    </div>
-
-                    <h3>
-                        COUPLE
-                    </h3>
-
-                    <p>
-                        Entry for two
-                    </p>
-
-                    <strong class="ticket-price">
-                        ₹699
-                        <small>
-                            / PASS
-                        </small>
-                    </strong>
-
-                    <a
-                        href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="ticket-button"
-                    >
-                        BOOK NOW →
-                    </a>
-
-                </article>
-
-
-
-                <!-- GROUP -->
-
-                <article class="ticket-card">
-
-                    <div class="ticket-top">
-                        <span>03</span>
-                    </div>
-
-                    <div class="ticket-icon">
-                        👥
-                    </div>
-
-                    <h3>
-                        GROUP
-                    </h3>
-
-                    <p>
-                        Entry for 5 people
-                    </p>
-
-                    <strong class="ticket-price">
-                        ₹1,749
-                        <small>
-                            / PASS
-                        </small>
-                    </strong>
-
-                    <a
-                        href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="ticket-button"
-                    >
-                        BOOK NOW →
-                    </a>
-
-                </article>
-
-
-
-                <!-- KIDS -->
-
-                <article class="ticket-card">
-
-                    <div class="ticket-top">
-                        <span>04</span>
-                    </div>
-
-                    <div class="ticket-icon">
-                        🧒
-                    </div>
-
-                    <h3>
-                        KIDS
-                    </h3>
-
-                    <p>
-                        Kids entry
-                    </p>
-
-                    <strong class="ticket-price">
-                        ₹199
-                        <small>
-                            / PERSON
-                        </small>
-                    </strong>
-
-                    <a
-                        href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="ticket-button"
-                    >
-                        BOOK NOW →
-                    </a>
-
-                </article>
-
-
-            </div>
-
-
-            <div class="ticket-trust">
-
-                <span>
-                    🔒 SECURE BOOKING
-                </span>
-
-                <i></i>
-
-                <span>
-                    🎟 DIGITAL TICKET
-                </span>
-
-                <i></i>
-
-                <span>
-                    ⚡ BOOKMYSHOW
-                </span>
-
-            </div>
-
 
         </section>
 
 
+        <!-- =========================
+             BOOKING PLATFORMS
+        ========================= -->
 
-        <!-- ==================================================
+        <section id="booking" class="booking-section">
+
+            <div class="section-container">
+
+                <div class="booking-box">
+
+                    <h2 class="booking-title">
+                        🎟️ Book Your Tickets
+                    </h2>
+
+                    <p class="booking-subtitle">
+                        Choose your preferred ticketing platform.
+                    </p>
+
+
+                    <div class="booking-grid">
+
+
+                        <!-- BOOKMYSHOW -->
+
+                        <div class="booking-card">
+
+                            <div>
+
+                                <div class="booking-logo">
+                                    🎬 BookMyShow
+                                </div>
+
+                                <p>
+                                    Book your Dandiya Utsav
+                                    tickets through BookMyShow.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="booking-btn"
+                                href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                BOOK ON BOOKMYSHOW →
+                            </a>
+
+                        </div>
+
+
+                        <!-- VIHAYA -->
+
+                        <div class="booking-card">
+
+                            <div>
+
+                                <div class="booking-logo">
+                                    🎫 Vihaya
+                                </div>
+
+                                <p>
+                                    Another convenient option
+                                    to book your event tickets.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="booking-btn"
+                                href="https://events.vihaya.app/events/dandiya-utsav-2026"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                BOOK ON VIHAYA →
+                            </a>
+
+                        </div>
+
+
+                        <!-- FISTORA -->
+
+                        <div class="booking-card">
+
+                            <div>
+
+                                <div class="booking-logo">
+                                    🎟️ Fistora
+                                </div>
+
+                                <p>
+                                    Discover and book Dandiya
+                                    Utsav tickets on Fistora.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="booking-btn"
+                                href="https://fistora.in/events/dandiya-utsav/16"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                BOOK ON FISTORA →
+                            </a>
+
+                        </div>
+
+
+                        <!-- FINKUP -->
+
+                        <div class="booking-card">
+
+                            <div>
+
+                                <div class="booking-logo">
+                                    🎉 FinkUP
+                                </div>
+
+                                <p>
+                                    Book Dandiya Utsav tickets
+                                    through FinkUP.
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="booking-btn"
+                                href="https://link.finkup.com/L7vPfo"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                BOOK ON FINKUP →
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
              VENUE
-        =================================================== -->
+        ========================= -->
 
-        <section
-            id="venue"
-            class="section venue"
-        >
+        <section id="venue">
 
+            <div class="section-container">
 
-            <div class="venue-content">
+                <div class="section-label">
+                    VENUE
+                </div>
 
-                <small class="section-label">
-                    EVENT VENUE
-                </small>
-
-                <h2>
-                    CHILDREN'S
-                    <span>PARK</span>
+                <h2 class="section-title">
+                    Meet Us At<br>
+                    Morabadi.
                 </h2>
 
-                <h3>
-                    MORABADI, RANCHI
-                </h3>
+                <div class="venue-card">
 
-                <p>
-                    Shahid Sankalp Children Park,
-                    Morabadi, Ranchi,
-                    Jharkhand 834008.
-                </p>
+                    <div>
 
+                        <h3>
+                            📍 Shahid Sankalp Children Park
+                        </h3>
 
-                <a
-                    href="https://maps.app.goo.gl/k6BaNDmjqYGpRspS8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="map-button"
-                >
-                    OPEN GOOGLE MAPS ↗
-                </a>
+                        <p>
+                            Morabadi, Ranchi, Jharkhand 834008
+                        </p>
 
-            </div>
+                        <p>
+                            🕕 16 October 2026 • 6:00 PM Onwards
+                        </p>
 
+                    </div>
 
-            <div class="venue-art">
+                    <a
+                        class="btn btn-primary"
+                        href="https://maps.app.goo.gl/k6BaNDmjqYGpRspS8"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        OPEN MAP →
+                    </a>
 
-                <div class="venue-moon"></div>
-
-                <div class="venue-arch"></div>
-
-                <div class="venue-dancer one">
-                    💃
-                </div>
-
-                <div class="venue-dancer two">
-                    🕺
-                </div>
-
-                <div class="venue-stars">
-                    ✦　✦　✦　✦　✦
                 </div>
 
             </div>
-
 
         </section>
 
 
+        <!-- =========================
+             CTA
+        ========================= -->
 
-        <!-- ==================================================
-             FINAL CTA
-        =================================================== -->
-
-        <section class="final-cta">
-
-            <small class="section-label">
-                16 • 10 • 2026
-            </small>
+        <section class="cta">
 
             <h2>
-
-                READY TO
-
-                <span>
-                    DANCE?
-                </span>
-
+                READY TO<br>
+                DANCE?
             </h2>
 
             <p>
-                Your Dandiya night starts here.
+                Gather your squad. Pick your pass.
+                Let's make this Navratri unforgettable.
             </p>
 
-
             <a
-                href="https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="primary-button"
+                class="btn btn-primary"
+                href="#booking"
             >
-
-                BOOK YOUR TICKET
-
-                <b>
-                    →
-                </b>
-
+                🎟️ CHOOSE YOUR BOOKING PLATFORM
             </a>
 
         </section>
 
-
     </main>
 
 
-
-    <!-- ==================================================
+    <!-- =========================
          FOOTER
-    =================================================== -->
+    ========================= -->
 
     <footer>
 
-        <div class="footer-brand">
+        <p>
+            © 2026 <strong>Dandiya Utsav</strong>.
+            All Rights Reserved.
+        </p>
 
-            <strong>
-                ✦ DANDIYA UTSAV
-            </strong>
-
-            <small>
-                BY SK EVENTS
-            </small>
-
-        </div>
-
-
-        <span>
-            © 2026 SK EVENTS
-        </span>
-
-        <span>
-            RANCHI • INDIA
-        </span>
+        <p style="margin-top:8px;">
+            Ranchi • 16 October 2026
+        </p>
 
     </footer>
 
 
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
-    <!-- JavaScript -->
+    <script>
 
-    <script src="script.js"></script>
+        /* =========================
+           LOADER
+        ========================= */
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                const loader = document.getElementById("loader");
+
+                if (loader) {
+                    loader.classList.add("hide");
+                }
+
+            }, 500);
+
+        });
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const mobileDrawer =
+            document.getElementById("mobileDrawer");
+
+        const mobileOverlay =
+            document.getElementById("mobileOverlay");
+
+
+        function openMenu() {
+
+            mobileDrawer.classList.add("active");
+            mobileOverlay.classList.add("active");
+
+            document.body.classList.add("menu-open");
+
+            menuButton.classList.add("is-open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Close menu"
+            );
+
+            mobileDrawer.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+        }
+
+
+        function closeMenu() {
+
+            mobileDrawer.classList.remove("active");
+            mobileOverlay.classList.remove("active");
+
+            document.body.classList.remove("menu-open");
+
+            menuButton.classList.remove("is-open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Open menu"
+            );
+
+            mobileDrawer.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        }
+
+
+        menuButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    mobileDrawer.classList.contains("active")
+                ) {
+
+                    closeMenu();
+
+                } else {
+
+                    openMenu();
+
+                }
+
+            }
+        );
+
+
+        mobileOverlay.addEventListener(
+            "click",
+            closeMenu
+        );
+
+
+        document
+            .querySelectorAll(".mobile-link, .mobile-ticket-btn")
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        closeMenu();
+
+                    }
+                );
+
+            });
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+                    closeMenu();
+                }
+
+            }
+        );
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                if (window.innerWidth > 1000) {
+                    closeMenu();
+                }
+
+            }
+        );
+
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        const eventDate =
+            new Date("2026-10-16T18:00:00+05:30");
+
+
+        function updateCountdown() {
+
+            const now = new Date();
+
+            const difference =
+                eventDate.getTime() -
+                now.getTime();
+
+
+            if (difference <= 0) {
+
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(
+                    difference / (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference /
+                        (1000 * 60 * 60)) % 24
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference /
+                        (1000 * 60)) % 60
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (difference / 1000) % 60
+                );
+
+
+            document.getElementById("days")
+                .textContent =
+                String(days).padStart(2, "0");
+
+
+            document.getElementById("hours")
+                .textContent =
+                String(hours).padStart(2, "0");
+
+
+            document.getElementById("minutes")
+                .textContent =
+                String(minutes).padStart(2, "0");
+
+
+            document.getElementById("seconds")
+                .textContent =
+                String(seconds).padStart(2, "0");
+
+        }
+
+
+        updateCountdown();
+
+        setInterval(
+            updateCountdown,
+            1000
+        );
+
+
+        /* =========================
+           SMOOTH SCROLL
+        ========================= */
+
+        document
+            .querySelectorAll('a[href^="#"]')
+            .forEach(function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function (event) {
+
+                        const targetId =
+                            this.getAttribute("href");
+
+                        if (
+                            targetId === "#" ||
+                            !targetId
+                        ) {
+                            return;
+                        }
+
+                        const target =
+                            document.querySelector(targetId);
+
+                        if (!target) {
+                            return;
+                        }
+
+                        event.preventDefault();
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+                );
+
+            });
+
+    </script>
 
 </body>
-
 </html>
