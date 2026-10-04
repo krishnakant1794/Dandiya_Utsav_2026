@@ -1,32 +1,31 @@
 /* =====================================================
    DANDIYA UTSAV 2026
-   FINAL JAVASCRIPT
+   JAVASCRIPT
 ===================================================== */
 
 
-/* =====================================================
-   LOADER
-===================================================== */
+/* ================= LOADER ================= */
 
 window.addEventListener("load", function () {
 
     const loader =
         document.getElementById("loader");
 
-    if (!loader) return;
-
     setTimeout(function () {
 
-        loader.classList.add("hide");
+        if (loader) {
 
-    }, 700);
+            loader.classList.add("hide");
+
+        }
+
+    }, 500);
 
 });
 
 
-
 /* =====================================================
-   ELEMENTS
+   MOBILE MENU
 ===================================================== */
 
 const menuButton =
@@ -38,21 +37,15 @@ const mobileDrawer =
 const mobileOverlay =
     document.getElementById("mobileOverlay");
 
-const drawerClose =
-    document.getElementById("drawerClose");
 
-const drawerLinks =
-    document.querySelectorAll(".drawer-link");
-
-
-
-/* =====================================================
-   MOBILE MENU
-===================================================== */
+/* ================= OPEN MENU ================= */
 
 function openMobileMenu() {
 
-    if (!mobileDrawer) return;
+    if (!mobileDrawer || !mobileOverlay || !menuButton) {
+        return;
+    }
+
 
     mobileDrawer.classList.add("active");
 
@@ -60,32 +53,38 @@ function openMobileMenu() {
 
     document.body.classList.add("menu-open");
 
-    mobileDrawer.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+
+    menuButton.classList.add("is-open");
+
 
     menuButton.setAttribute(
         "aria-expanded",
         "true"
     );
 
+
     menuButton.setAttribute(
         "aria-label",
         "Close menu"
     );
 
-    /* Hamburger → X */
 
-    menuButton.classList.add("is-open");
+    mobileDrawer.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
 }
 
 
+/* ================= CLOSE MENU ================= */
 
 function closeMobileMenu() {
 
-    if (!mobileDrawer) return;
+    if (!mobileDrawer || !mobileOverlay || !menuButton) {
+        return;
+    }
+
 
     mobileDrawer.classList.remove("active");
 
@@ -93,30 +92,31 @@ function closeMobileMenu() {
 
     document.body.classList.remove("menu-open");
 
-    mobileDrawer.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+
+    menuButton.classList.remove("is-open");
+
 
     menuButton.setAttribute(
         "aria-expanded",
         "false"
     );
 
+
     menuButton.setAttribute(
         "aria-label",
         "Open menu"
     );
 
-    menuButton.classList.remove("is-open");
+
+    mobileDrawer.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 
 }
 
 
-
-/* =====================================================
-   MENU BUTTON
-===================================================== */
+/* ================= TOGGLE ================= */
 
 if (menuButton) {
 
@@ -125,9 +125,8 @@ if (menuButton) {
         function () {
 
             const isOpen =
-                mobileDrawer.classList.contains(
-                    "active"
-                );
+                mobileDrawer.classList.contains("active");
+
 
             if (isOpen) {
 
@@ -145,29 +144,7 @@ if (menuButton) {
 }
 
 
-
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
-
-if (drawerClose) {
-
-    drawerClose.addEventListener(
-        "click",
-        function () {
-
-            closeMobileMenu();
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   OVERLAY CLICK
-===================================================== */
+/* ================= OVERLAY CLOSE ================= */
 
 if (mobileOverlay) {
 
@@ -183,70 +160,23 @@ if (mobileOverlay) {
 }
 
 
-
 /* =====================================================
-   MOBILE NAVIGATION
+   MOBILE LINKS
 ===================================================== */
 
-drawerLinks.forEach(function (link) {
+const mobileLinks =
+    document.querySelectorAll(
+        ".mobile-link, .mobile-ticket-btn"
+    );
+
+
+mobileLinks.forEach(function (link) {
 
     link.addEventListener(
         "click",
-        function (event) {
-
-            const targetID =
-                link.getAttribute("href");
-
-
-            if (
-                !targetID ||
-                !targetID.startsWith("#")
-            ) {
-                return;
-            }
-
-
-            event.preventDefault();
-
-
-            const target =
-                document.querySelector(
-                    targetID
-                );
-
+        function () {
 
             closeMobileMenu();
-
-
-            if (!target) return;
-
-
-            setTimeout(
-                function () {
-
-                    const headerOffset =
-                        window.innerWidth <= 650
-                            ? 105
-                            : 125;
-
-
-                    const targetPosition =
-                        target.getBoundingClientRect().top +
-                        window.scrollY -
-                        headerOffset;
-
-
-                    window.scrollTo({
-
-                        top: targetPosition,
-
-                        behavior: "smooth"
-
-                    });
-
-                },
-                100
-            );
 
         }
     );
@@ -254,9 +184,8 @@ drawerLinks.forEach(function (link) {
 });
 
 
-
 /* =====================================================
-   ESC KEY
+   ESCAPE KEY
 ===================================================== */
 
 document.addEventListener(
@@ -273,24 +202,15 @@ document.addEventListener(
 );
 
 
-
 /* =====================================================
-   RESIZE
+   WINDOW RESIZE
 ===================================================== */
 
 window.addEventListener(
     "resize",
     function () {
 
-        /*
-         * If user rotates phone or
-         * changes viewport to desktop,
-         * close mobile menu.
-         */
-
-        if (
-            window.innerWidth > 1000
-        ) {
+        if (window.innerWidth > 1000) {
 
             closeMobileMenu();
 
@@ -300,119 +220,176 @@ window.addEventListener(
 );
 
 
-
 /* =====================================================
    COUNTDOWN
 ===================================================== */
 
+/*
+   Event:
+   16 October 2026
+   6:00 PM
+   India Standard Time
+*/
+
+
 const eventDate =
     new Date(
         "2026-10-16T18:00:00+05:30"
-    ).getTime();
-
+    );
 
 
 function updateCountdown() {
 
-    const daysElement =
-        document.getElementById("days");
-
-    const hoursElement =
-        document.getElementById("hours");
-
-    const minutesElement =
-        document.getElementById("minutes");
-
-    const secondsElement =
-        document.getElementById("seconds");
-
-
-    if (
-        !daysElement ||
-        !hoursElement ||
-        !minutesElement ||
-        !secondsElement
-    ) {
-
-        return;
-
-    }
-
-
     const now =
-        Date.now();
+        new Date();
 
 
-    const distance =
-        eventDate - now;
+    const difference =
+        eventDate.getTime()
+        -
+        now.getTime();
 
 
-    if (distance <= 0) {
+    /* EVENT STARTED */
 
-        daysElement.textContent = "00";
+    if (difference <= 0) {
 
-        hoursElement.textContent = "00";
+        const days =
+            document.getElementById("days");
 
-        minutesElement.textContent = "00";
+        const hours =
+            document.getElementById("hours");
 
-        secondsElement.textContent = "00";
+        const minutes =
+            document.getElementById("minutes");
+
+        const seconds =
+            document.getElementById("seconds");
+
+
+        if (days) {
+            days.textContent = "00";
+        }
+
+
+        if (hours) {
+            hours.textContent = "00";
+        }
+
+
+        if (minutes) {
+            minutes.textContent = "00";
+        }
+
+
+        if (seconds) {
+            seconds.textContent = "00";
+        }
+
 
         return;
 
     }
 
+
+    /* CALCULATE */
 
     const days =
         Math.floor(
-            distance /
+            difference /
             (1000 * 60 * 60 * 24)
         );
 
 
     const hours =
         Math.floor(
-            (distance %
-                (1000 * 60 * 60 * 24)) /
-            (1000 * 60 * 60)
+            (
+                difference /
+                (1000 * 60 * 60)
+            ) % 24
         );
 
 
     const minutes =
         Math.floor(
-            (distance %
-                (1000 * 60 * 60)) /
-            (1000 * 60)
+            (
+                difference /
+                (1000 * 60)
+            ) % 60
         );
 
 
     const seconds =
         Math.floor(
-            (distance %
-                (1000 * 60)) /
-            1000
+            (
+                difference /
+                1000
+            ) % 60
         );
 
 
-    daysElement.textContent =
-        String(days).padStart(2, "0");
+    /* DISPLAY */
+
+    const daysElement =
+        document.getElementById("days");
 
 
-    hoursElement.textContent =
-        String(hours).padStart(2, "0");
+    const hoursElement =
+        document.getElementById("hours");
 
 
-    minutesElement.textContent =
-        String(minutes).padStart(2, "0");
+    const minutesElement =
+        document.getElementById("minutes");
 
 
-    secondsElement.textContent =
-        String(seconds).padStart(2, "0");
+    const secondsElement =
+        document.getElementById("seconds");
+
+
+    if (daysElement) {
+
+        daysElement.textContent =
+            String(days)
+            .padStart(2, "0");
+
+    }
+
+
+    if (hoursElement) {
+
+        hoursElement.textContent =
+            String(hours)
+            .padStart(2, "0");
+
+    }
+
+
+    if (minutesElement) {
+
+        minutesElement.textContent =
+            String(minutes)
+            .padStart(2, "0");
+
+    }
+
+
+    if (secondsElement) {
+
+        secondsElement.textContent =
+            String(seconds)
+            .padStart(2, "0");
+
+    }
 
 }
 
 
+/* RUN IMMEDIATELY */
+
 updateCountdown();
 
+
+/* UPDATE EVERY SECOND */
 
 setInterval(
     updateCountdown,
@@ -420,31 +397,165 @@ setInterval(
 );
 
 
-
 /* =====================================================
-   BOOKMYSHOW
+   SMOOTH SCROLL
 ===================================================== */
 
-const BOOKMYSHOW_URL =
-    "https://in.bookmyshow.com/activities/dandiya-utsav-2026/ET00518621";
+const internalLinks =
+    document.querySelectorAll(
+        'a[href^="#"]'
+    );
 
 
-document
-    .querySelectorAll(
-        'a[href*="bookmyshow.com"]'
-    )
-    .forEach(function (link) {
+internalLinks.forEach(function (link) {
 
-        link.addEventListener(
-            "click",
-            function () {
+    link.addEventListener(
+        "click",
+        function (event) {
 
-                console.log(
-                    "Opening BookMyShow:",
-                    BOOKMYSHOW_URL
-                );
+            const targetId =
+                this.getAttribute("href");
+
+
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
+
+                return;
 
             }
-        );
+
+
+            const target =
+                document.querySelector(
+                    targetId
+                );
+
+
+            if (!target) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   BOOKING BUTTON TRACKING
+===================================================== */
+
+const bookingButtons =
+    document.querySelectorAll(
+        ".booking-btn"
+    );
+
+
+bookingButtons.forEach(function (button) {
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            console.log(
+                "Ticket booking platform selected:",
+                this.href
+            );
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   ACTIVE NAVIGATION
+===================================================== */
+
+const sections =
+    document.querySelectorAll(
+        "main section[id]"
+    );
+
+
+const desktopLinks =
+    document.querySelectorAll(
+        ".desktop-nav a"
+    );
+
+
+function updateActiveNav() {
+
+    let currentSection = "";
+
+
+    sections.forEach(function (section) {
+
+        const sectionTop =
+            section.offsetTop - 180;
+
+
+        const sectionHeight =
+            section.offsetHeight;
+
+
+        if (
+            window.scrollY >= sectionTop &&
+            window.scrollY <
+            sectionTop + sectionHeight
+        ) {
+
+            currentSection =
+                section.getAttribute("id");
+
+        }
 
     });
+
+
+    desktopLinks.forEach(function (link) {
+
+        link.classList.remove("active");
+
+
+        const href =
+            link.getAttribute("href");
+
+
+        if (
+            href === "#" +
+            currentSection
+        ) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateActiveNav
+);
+
+
+updateActiveNav();
